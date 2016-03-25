@@ -8,5 +8,6 @@
             "email": "harishmoghe@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "minimum-stability": "dev"
 }
