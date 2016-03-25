@@ -1,0 +1,12 @@
+{
+    "name": "laura/cms",
+    "description": "This CMS library package for laravel",
+    "type": "Package",
+    "authors": [
+        {
+            "name": "harish",
+            "email": "harishmoghe@gmail.com"
+        }
+    ],
+    "require": {}
+}
