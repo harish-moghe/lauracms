@@ -1,0 +1,13 @@
+<?php
+
+namespace DummyRootNamespaceModels\Widgets;
+
+use Illuminate\Database\Eloquent\Model;
+
+use Laura\Containers\WidgetInterface as LauraWidgetInterface;
+
+class DummyClass extends Model implements LauraWidgetInterface {
+    public function get_data(){
+        return $data;
+    }
+}
