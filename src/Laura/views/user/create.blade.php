@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 ?>
-@extends('backend.layouts.main')
+@extends('Laura::layouts.main')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -30,37 +30,51 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Create Post</h3>
                     </div>
+                    @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                     <!-- /.box-header -->
                     <!-- form start -->
-                    {!! Form::open(array('url' => action("backend\UserController@store"), 'role' => 'form')) !!}
-                    {!! csrf_field() !!}
-                    <div class="box-body">
-                        <div class="form-group">
-                           {{ Form::label('Username', 'Username', array('for' => 'username')) }}
+                    <form method="POST" action="{{ action("\Laura\Controllers\Backend\UserController@store") }}" accept-charset="UTF-8" role="form" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="Username">Username</label>
 
-                           {{ Form::text('username', '', array("class" => "form-control", "id" => "username", "required" => true)) }}
-                        </div>
-                        <div class="form-group">
-                            {{ Form::label('email', 'E-Mail Address', array('for' => 'email',  "required" => "", "email" => "")) }}
+                                <input class="form-control" id="username" required="1" name="name" type="text" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" required="" email="">E-Mail Address</label>
 
-                           {{ Form::text('email', '', array("class" => "form-control", "id" => "email")) }}
-                        </div>
-                        <div class="form-group">
-                            {{ Form::label('Password', 'Password', array('for' => 'password')) }}
-                          {{  Form::password('password', array('class' => 'form-control', "required" => "")) }}
-                        </div>
-                        <div class="form-group">
-                            {{ Form::label('Confirm Password', 'Confirm Password', array('for' => 'cnf_password')) }}
-                            {{ Form::password('cnf_password', array('class' => 'form-control', "required" => "")) }}
-                        </div>
-                        <div class="checkbox">
-                          {{ Form::select('Role', array('1' => 'Admin', '2' => 'Super Admin', '3' => 'Moderator')) }}
-                        </div>
-                    </div><!-- /.box-body -->
+                                <input class="form-control" id="email" name="email" type="text" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="Password">Password</label>
+                                <input class="form-control" required="" name="password" type="password" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="Confirm Password">Confirm Password</label>
+                                <input class="form-control" required="" name="cnf_password" type="password" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="User Image">user image</label>
+                                <input name="image" type="file">
+                            </div>
 
-                    <div class="box-footer">
-                        <button class="btn btn-primary" type="submit">Submit</button>
-                    </div>
+                            <div class="checkbox">
+                                <select name="Role"><option value="1">Admin</option><option value="2">Super Admin</option><option value="3">Moderator</option></select>
+                            </div>
+                        </div><!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
                     </form>
                 </div>
             </div>

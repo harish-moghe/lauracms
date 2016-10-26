@@ -3,8 +3,10 @@
 namespace Laura\Containers;
 
 use Illuminate\Http\Response;
+use App\Models\Widgets;
 use App\Models\Widgets\current_user as cu;
-use View;
+use Illuminate\Support\Facades\View;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,14 +20,17 @@ Class Widget {
     var $output = "";
 
     public function __construct() {
-        ;
+        
     }
 
     public static function render($name) {
-        $view = $name; 
-        $widgetObject = new cu();
+        $name = str_replace('"', "", $name);
+        $name = str_replace("'", "", $name);
+        $class = 'App\\Models\\Widgets\\' . $name;
+        $widgetObject = new $class;
         $widget_data = $widgetObject->get_data();
-        return View($view, $widget_data);
+        $string = View::make($name, $widget_data);
+        return htmlspecialchars_decode($string);
     }
 
 }

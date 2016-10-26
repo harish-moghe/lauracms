@@ -4,12 +4,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 ?>
+
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-        <!-- Sidebar user panel -->
-        {!! $current_user !!}
+        <!-- Sidebar user panel -->       
+        @laurawidget('current_user')  
         <!-- search form -->
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
