@@ -6,6 +6,8 @@ namespace Laura;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Blade;
+use view;
 
 class CmsServiceProvider extends ServiceProvider {
 
@@ -24,7 +26,7 @@ class CmsServiceProvider extends ServiceProvider {
         ]);
 
         if (!$this->app->routesAreCached()) {
-            require __DIR__ . '\routes.php';
+            $res = require __DIR__ . '\routes.php';
         }
 
         $this->loadViewsFrom(__DIR__ . '\views', 'Laura');
@@ -38,10 +40,9 @@ class CmsServiceProvider extends ServiceProvider {
             __DIR__ . '/assets/backend' => public_path('vendor/laura'),
                 ], 'public');
 
-        $this->app->bind('LauraWidgetHelper', function() {
-            return new \Laura\Helpers\View\LauraWidget;
+        Blade::directive('laurawidget', function($widget_name) {
+            return '<?php echo \Laura\Containers\Widget::render('.$widget_name.'); ?>';
         });
-       view()->share('current_user', view("current_user")->render());
     }
 
     /**
